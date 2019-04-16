@@ -47,7 +47,7 @@ function Check-Deps(){
   
   DEPENDENCES_ZSH_MISSING=()
   for i ($DEPENDENCES_ZSH); do
-    if [[ ! " ${FPATH} " == *"$i"* ]]; then
+    if [[ ! " ${FPATH} " == *"$( basename "$i")"* ]]; then
       DEPENDENCES_ZSH_MISSING+=( $i )
     fi
   done
