@@ -8,9 +8,10 @@ Now is supported:
 * Nodejs
 * Zsh plugins
 
+
 ### How to use from plugins
 
-Ad to your plugin some of these instructions
+Add to your plugin some of these instructions
 
 ```sh
 # For package managers append to these arrays another item: 
