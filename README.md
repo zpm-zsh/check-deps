@@ -6,7 +6,7 @@ Now is supported:
 * Debian, Ubuntu and other deb based
 * Arch and derivatives
 * Nodejs
-* Zsh plugins (if you use [zpm](https://github.com/zpm-zsh/zpm))
+* Zsh plugins
 
 ### How to use from plugins
 
@@ -21,9 +21,8 @@ DEPENDENCES_DEBIAN+=( node@nodejs )
 DEPENDENCES_NPM+=( cli-md )
 
 # For ZSH add name of required plugin
-DEPENDENCES_ZSH+=( zsh-completions )
+DEPENDENCES_ZSH+=( zsh-users/zsh-completions )
 ```
-
 
 ## Installation
 
@@ -46,6 +45,4 @@ Add `zgen load zpm-zsh/check-deps` into `.zshrc`
 ### TODO:
 
 
-* Add Python 2 and 3
-* Add other Zsh package managers
-
+- [ ] Add Python 2 and 3 
