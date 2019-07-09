@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 function get_package_if_need(){
   if [[ "$1" == *@* ]]; then
-    executable=$(echo -n $1|awk -F'@' '{print $1}')
-    package=$(echo -n $1|awk -F'@' '{print $2}')
+    executable=${1%%@*}
+    package=${1#*@}
   else
     package="$1"
     executable="$1"
