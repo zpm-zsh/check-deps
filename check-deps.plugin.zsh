@@ -1,4 +1,21 @@
 #!/usr/bin/env zsh
+
+function gen_install_msg(){
+  install_message="Please install missing packages using: \`$1\`"
+  if [[ "$CLICOLOR" == "1" ]]; then
+    install_message="$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`"
+  fi
+  echo $install_message
+}
+
+function gen_zsh_msg(){
+  install_message="Please install missing zsh plugins: \`$1\`"
+  if [[ "$CLICOLOR" == "1" ]]; then
+    install_message="$c[cyan]Please install missing zsh plugins: $c[red]\`$c[yellow]$1$c[red]\`"
+  fi
+  echo $install_message
+}
+
 function get_package_if_need(){
   if [[ "$1" == *@* ]]; then
     executable=${1%%@*}
@@ -15,44 +32,57 @@ function get_package_if_need(){
 
 function Check-Deps(){
   #Arch System Deps
-  if (( $+commands[pacman] )); then
+  if command -v pacman >/dev/null; then
     local DEPENDENCES_ARCH_MISSING=()
     for i ($DEPENDENCES_ARCH); do
       DEPENDENCES_ARCH_MISSING+=( $(get_package_if_need $i) )
     done
     if [[ ! -z "$DEPENDENCES_ARCH_MISSING" ]]; then
-      echo "Please install missing packages using \`sudo pacman -S $DEPENDENCES_ARCH_MISSING\`"
+      gen_install_msg "sudo pacman -S $DEPENDENCES_ARCH_MISSING"
     fi
   fi
-  
-  if (( $+commands[dpkg] )); then
-    DEPENDENCES_DEBIAN_MISSING=()
+  # Debian || Ubuntu
+  if command -v dpkg >/dev/null; then
+    local DEPENDENCES_DEBIAN_MISSING=()
     for i ($DEPENDENCES_DEBIAN); do
       DEPENDENCES_DEBIAN_MISSING+=( $(get_package_if_need $i) )
     done
     if [ ! -z "$DEPENDENCES_DEBIAN_MISSING" ]; then
-      echo "Please install missing packages using \`sudo apt install $DEPENDENCES_DEBIAN_MISSING\`"
+      gen_install_msg "sudo apt install $DEPENDENCES_DEBIAN_MISSING"
     fi
   fi
   
-  if (( $+commands[npm] )); then
-    DEPENDENCES_NPM_MISSING=()
+  # Node.js
+  if command -v npm >/dev/null; then
+    local DEPENDENCES_NPM_MISSING=()
     for i ($DEPENDENCES_NPM); do
       DEPENDENCES_NPM_MISSING+=( $(get_package_if_need $i) )
     done
     if [ ! -z "$DEPENDENCES_NPM_MISSING" ]; then
-      echo "Please install missing packages using \`sudo npm install -g $DEPENDENCES_NPM_MISSING\`"
+      gen_install_msg "npm install -g $DEPENDENCES_NPM_MISSING"
     fi
   fi
   
-  DEPENDENCES_ZSH_MISSING=()
+  # PIP
+  if command -v pip >/dev/null; then
+    local DEPENDENCES_PIP_MISSING=()
+    for i ($DEPENDENCES_PIP); do
+      DEPENDENCES_PIP_MISSING+=( $(get_package_if_need $i) )
+    done
+    if [ ! -z "$DEPENDENCES_PIP_MISSING" ]; then
+     gen_install_msg "pip install --user $DEPENDENCES_PIP_MISSING"
+    fi
+  fi
+  
+  # ZSH
+  local DEPENDENCES_ZSH_MISSING=()
   for i ($DEPENDENCES_ZSH); do
-    if [[ ! " ${FPATH} " == *"$(basename $i)"* ]]; then
+    if [[ ! ":${FPATH}:" == *"$(basename $i)"* ]]; then
       DEPENDENCES_ZSH_MISSING+=( $i )
     fi
   done
   if [ ! -z "$DEPENDENCES_ZSH_MISSING" ]; then
-    echo "Please install missing zsh plugins: \`$DEPENDENCES_ZSH_MISSING\`"
+    gen_zsh_msg "$DEPENDENCES_ZSH_MISSING"
   fi
 }
 
