@@ -3,7 +3,7 @@
 function gen_install_msg(){
   install_message="Please install missing packages using: \`$1\`"
   if [[ "$CLICOLOR" == "1" ]]; then
-    install_message="$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`"
+    install_message="$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
   fi
   echo $install_message
 }
@@ -11,7 +11,7 @@ function gen_install_msg(){
 function gen_zsh_msg(){
   install_message="Please install missing zsh plugins: \`$1\`"
   if [[ "$CLICOLOR" == "1" ]]; then
-    install_message="$c[cyan]Please install missing zsh plugins: $c[red]\`$c[yellow]$1$c[red]\`"
+    install_message="$c[cyan]Please install missing zsh plugins: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
   fi
   echo $install_message
 }
