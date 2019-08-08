@@ -1,18 +1,18 @@
 #!/usr/bin/env zsh
 
+DEPENDENCES_ZSH+=( zpm-zsh/colors )
+
+if command -v zpm >/dev/null; then
+  zpm zpm-zsh/colors
+fi
+
 function gen_install_msg(){
-  install_message="Please install missing packages using: \`$1\`"
-  if [[ "$CLICOLOR" == "1" ]]; then
-    install_message="$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
-  fi
+  install_message="$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
   echo $install_message
 }
 
 function gen_zsh_msg(){
-  install_message="Please install missing zsh plugins: \`$1\`"
-  if [[ "$CLICOLOR" == "1" ]]; then
-    install_message="$c[cyan]Please install missing zsh plugins: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
-  fi
+  install_message="$c[cyan]Please install missing zsh plugins: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
   echo $install_message
 }
 
@@ -70,7 +70,7 @@ function Check-Deps(){
       DEPENDENCES_PIP_MISSING+=( $(get_package_if_need $i) )
     done
     if [ ! -z "$DEPENDENCES_PIP_MISSING" ]; then
-     gen_install_msg "pip install --user $DEPENDENCES_PIP_MISSING"
+      gen_install_msg "pip install --user $DEPENDENCES_PIP_MISSING"
     fi
   fi
   
