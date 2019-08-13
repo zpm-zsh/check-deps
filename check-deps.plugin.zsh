@@ -77,7 +77,7 @@ function Check-Deps(){
   # ZSH
   local DEPENDENCES_ZSH_MISSING=()
   for i ($DEPENDENCES_ZSH); do
-    if [[ ! ":${FPATH}:" == *"$(basename $i)"* ]]; then
+    if [[ "${_ZPM_Plugins[@]}" != *"$(basename $i)"* ]]; then
       DEPENDENCES_ZSH_MISSING+=( $i )
     fi
   done
