@@ -1,18 +1,11 @@
 #!/usr/bin/env zsh
 
-DEPENDENCES_ZSH+=( zpm-zsh/colors )
-
 if command -v zpm >/dev/null; then
   zpm zpm-zsh/colors
 fi
 
 function gen_install_msg(){
   install_message="$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
-  echo $install_message
-}
-
-function gen_zsh_msg(){
-  install_message="$c[cyan]Please install missing zsh plugins: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
   echo $install_message
 }
 
@@ -74,16 +67,6 @@ function Check-Deps(){
     fi
   fi
   
-  # ZSH
-  local DEPENDENCES_ZSH_MISSING=()
-  for i ($DEPENDENCES_ZSH); do
-    if [[ "${_ZPM_Plugins[@]}" != *"$(basename $i)"* ]]; then
-      DEPENDENCES_ZSH_MISSING+=( $i )
-    fi
-  done
-  if [ ! -z "$DEPENDENCES_ZSH_MISSING" ]; then
-    gen_zsh_msg "$DEPENDENCES_ZSH_MISSING"
-  fi
 }
 
 function _check_deps(){
