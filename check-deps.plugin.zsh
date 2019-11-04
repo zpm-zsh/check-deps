@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if command -v zpm >/dev/null; then
+if (( $+functions[zpm] )); then
   zpm zpm-zsh/colors
 fi
 
@@ -34,6 +34,7 @@ function Check-Deps(){
       gen_install_msg "sudo pacman -S $DEPENDENCES_ARCH_MISSING"
     fi
   fi
+  
   # Debian || Ubuntu
   if command -v dpkg >/dev/null; then
     local DEPENDENCES_DEBIAN_MISSING=()
