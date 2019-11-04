@@ -25,7 +25,7 @@ function get_package_if_need(){
 
 function Check-Deps(){
   #Arch System Deps
-  if command -v pacman >/dev/null; then
+  if (( $+commands[pacman] )); then
     local DEPENDENCES_ARCH_MISSING=()
     for i ($DEPENDENCES_ARCH); do
       DEPENDENCES_ARCH_MISSING+=( $(get_package_if_need $i) )
@@ -36,7 +36,7 @@ function Check-Deps(){
   fi
   
   # Debian || Ubuntu
-  if command -v dpkg >/dev/null; then
+  if (( $+commands[dpkg] )); then
     local DEPENDENCES_DEBIAN_MISSING=()
     for i ($DEPENDENCES_DEBIAN); do
       DEPENDENCES_DEBIAN_MISSING+=( $(get_package_if_need $i) )
@@ -47,7 +47,7 @@ function Check-Deps(){
   fi
   
   # Node.js
-  if command -v npm >/dev/null; then
+  if (( $+commands[npm] )); then
     local DEPENDENCES_NPM_MISSING=()
     for i ($DEPENDENCES_NPM); do
       DEPENDENCES_NPM_MISSING+=( $(get_package_if_need $i) )
@@ -58,7 +58,7 @@ function Check-Deps(){
   fi
   
   # PIP
-  if command -v pip >/dev/null; then
+  if (( $+commands[pip] )); then
     local DEPENDENCES_PIP_MISSING=()
     for i ($DEPENDENCES_PIP); do
       DEPENDENCES_PIP_MISSING+=( $(get_package_if_need $i) )
