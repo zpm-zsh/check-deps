@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 if (( $+functions[zpm] )); then
-  zpm zpm-zsh/colors
+  zpm zpm-zsh/colors,inline
 fi
 
 function gen_install_msg(){
