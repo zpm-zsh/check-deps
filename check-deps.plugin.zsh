@@ -10,6 +10,8 @@ function gen_install_msg(){
 }
 
 function get_package_if_need(){
+  local executable
+  local package
   if [[ "$1" == *@* ]]; then
     executable=${1%%@*}
     package=${1#*@}
