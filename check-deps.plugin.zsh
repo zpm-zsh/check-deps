@@ -4,6 +4,11 @@ if (( $+functions[zpm] )); then
   zpm zpm-zsh/colors,inline
 fi
 
+typeset -g DEPENDENCES_ARCH
+typeset -g DEPENDENCES_DEBIAN
+typeset -g DEPENDENCES_NPM
+typeset -g DEPENDENCES_PIP
+
 function gen_install_msg(){
   install_message="$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
   echo $install_message
@@ -40,6 +45,7 @@ function Check-Deps(){
   
   # Debian || Ubuntu
   if (( $+commands[dpkg] )); then
+    local i
     local DEPENDENCES_DEBIAN_MISSING=()
     for i ($DEPENDENCES_DEBIAN); do
       DEPENDENCES_DEBIAN_MISSING+=( $(get_package_if_need $i) )
