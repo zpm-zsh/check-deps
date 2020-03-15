@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
-if (( $+functions[zpm] )); then
-  zpm zpm-zsh/colors
-fi
+if (( $+functions[zpm] )); then #DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE
+  zpm zpm-zsh/colors #DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE
+fi #DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE
 
 declare -a DEPENDENCES_ARCH
 declare -a DEPENDENCES_DEBIAN
