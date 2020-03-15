@@ -4,14 +4,13 @@ if (( $+functions[zpm] )); then
   zpm zpm-zsh/colors
 fi
 
-typeset -g DEPENDENCES_ARCH
-typeset -g DEPENDENCES_DEBIAN
-typeset -g DEPENDENCES_NPM
-typeset -g DEPENDENCES_PIP
+declare -a DEPENDENCES_ARCH
+declare -a DEPENDENCES_DEBIAN
+declare -a DEPENDENCES_NPM
+declare -a DEPENDENCES_PIP
 
 function gen_install_msg() {
-  install_message="$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
-  echo $install_message
+  echo "$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
 }
 
 function get_package_if_need() {
@@ -87,7 +86,6 @@ function _check_deps_init() {
   _check_deps
   add-zsh-hook -d precmd _check_deps_init
 }
-
 
 if [[ "$CHECK_DEPS_AT_START" != "false" ]]; then
   autoload -Uz add-zsh-hook
