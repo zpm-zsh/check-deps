@@ -6,7 +6,7 @@ declare -a DEPENDENCES_NPM
 declare -a DEPENDENCES_PIP
 
 function gen_install_msg() {
-  echo "$c[cyan]Please install missing packages using: $c[red]\`$c[yellow]$1$c[red]\`$c_reset"
+  echo "${c[cyan]}Please install missing packages using: ${c[red]}\`${c[yellow]}$1${c[red]}\`${c[reset]}"
 }
 
 function get_package_if_need() {
