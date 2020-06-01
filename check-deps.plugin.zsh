@@ -25,7 +25,7 @@ function get_package_if_need() {
   fi
 }
 
-function _check_deps() {
+function check-deps() {
   local i
 
   #Arch System Deps
@@ -78,12 +78,6 @@ function _check_deps() {
 
 }
 
-function _check_deps_init() {
-  _check_deps
-  add-zsh-hook -d precmd _check_deps_init
-}
-
 if [[ "$CHECK_DEPS_AT_START" != "false" ]]; then
-  autoload -Uz add-zsh-hook
-  add-zsh-hook precmd _check_deps_init
+  check-deps
 fi
