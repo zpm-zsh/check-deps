@@ -20,9 +20,6 @@ Add to your plugin some of these instructions
 DEPENDENCES_ARCH+=( node@nodejs ) 
 DEPENDENCES_DEBIAN+=( node@nodejs )
 DEPENDENCES_NPM+=( cli-md )
-
-# For ZSH add name of required plugin
-DEPENDENCES_ZSH+=( zsh-users/zsh-completions )
 ```
 
 ## Installation
@@ -50,5 +47,4 @@ Add `zgen load zpm-zsh/check-deps` into `.zshrc`
 
 ### TODO:
 
-
-- [ ] Add Python 2 and 3 
+- Add zsh plugins check
