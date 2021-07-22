@@ -1,0 +1,49 @@
+#!/usr/bin/env zsh
+
+#Arch System Deps
+((if (( $+commands[pacman] )); then
+      local DEPENDENCES_ARCH_MISSING=()
+      for i ($DEPENDENCES_ARCH); do
+        DEPENDENCES_ARCH_MISSING+=( $(get_package_if_need $i) )
+      done
+      if [[ ! -z "$DEPENDENCES_ARCH_MISSING" ]]; then
+        gen_install_msg "sudo pacman -S $DEPENDENCES_ARCH_MISSING"
+      fi
+    fi
+) &)
+
+# Debian || Ubuntu
+((if (( $+commands[dpkg] )); then
+      local DEPENDENCES_DEBIAN_MISSING=()
+      for i ($DEPENDENCES_DEBIAN); do
+        DEPENDENCES_DEBIAN_MISSING+=( $(get_package_if_need $i) )
+      done
+      if [ ! -z "$DEPENDENCES_DEBIAN_MISSING" ]; then
+        gen_install_msg "sudo apt install $DEPENDENCES_DEBIAN_MISSING"
+      fi
+    fi
+) &)
+
+# Node.js
+(( if (( $+commands[npm] )); then
+      local DEPENDENCES_NPM_MISSING=()
+      for i ($DEPENDENCES_NPM); do
+        DEPENDENCES_NPM_MISSING+=( $(get_package_if_need $i) )
+      done
+      if [ ! -z "$DEPENDENCES_NPM_MISSING" ]; then
+        gen_install_msg "npm install -g $DEPENDENCES_NPM_MISSING"
+      fi
+    fi
+) &)
+
+# PIP
+(( if (( $+commands[pip] )); then
+      local DEPENDENCES_PIP_MISSING=()
+      for i ($DEPENDENCES_PIP); do
+        DEPENDENCES_PIP_MISSING+=( $(get_package_if_need $i) )
+      done
+      if [ ! -z "$DEPENDENCES_PIP_MISSING" ]; then
+        gen_install_msg "pip install --user $DEPENDENCES_PIP_MISSING"
+      fi
+    fi
+) &)

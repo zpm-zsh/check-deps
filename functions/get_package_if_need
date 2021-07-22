@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+local executable
+local package
+if [[ "$1" == *@* ]]; then
+  executable=${1%%@*}
+  package=${1#*@}
+else
+  package="$1"
+  executable="$1"
+fi
+
+if (( ! $+commands[$executable] )); then
+  echo $package
+fi

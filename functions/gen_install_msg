@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+echo "${c[cyan]}Please install missing packages using: ${c[red]}\`${c[yellow]}$1${c[red]}\`${c[reset]}"
